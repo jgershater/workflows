@@ -23,7 +23,7 @@ jobs:
         with:
           jobs: |
             name: SUSE Technical Release Notes
-            url: https://www.suse.com/releasenotes/
+            url: https://forums.suse.com/c/announcements/12.rss
             filters:
               - html2text
             ---
