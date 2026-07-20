@@ -2,9 +2,9 @@ name: "Track Competitor Product Updates"
 
 on:
   schedule:
-    # Runs every 6 hours (Adjust the cron schedule if you want it more or less frequent)
-    - cron: '0 */6 * * *'
-  workflow_dispatch: # Allows you to trigger the check manually from the UI anytime
+    # Runs exactly once a day at 18:00 UTC (10:00 AM PST)
+    - cron: '0 18 * * *'
+  workflow_dispatch: # Allows manual trigger from the Actions tab
 
 permissions:
   contents: write
@@ -17,11 +17,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check for SUSE and Nutanix updates
+      - name: Check for Competitor Updates
         id: webchanges
         uses: swimmwatch/webchanges-action@v1.0.1
         with:
-          # Define the specific product update pages we found earlier
           jobs: |
             name: SUSE Technical Release Notes
             url: https://www.suse.com/releasenotes/
@@ -34,6 +33,26 @@ jobs:
               - html2text
             ---
             name: Nutanix Community Product Blog
-            url: https://next.nutanix.com/
+            url: https://next.nutanix.com/blog-board-8
+            filters:
+              - html2text
+            ---
+            name: Broadcom VMware Cloud Foundation Releases
+            url: https://docs.broadcom.com/info2/release-notes
+            filters:
+              - html2text
+            ---
+            name: AWS EKS Kubernetes Version Support Notes
+            url: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions-standard.html
+            filters:
+              - html2text
+            ---
+            name: Azure AKS GitHub Releases
+            url: https://github.com/Azure/AKS/releases
+            filters:
+              - html2text
+            ---
+            name: Google GKE Production Release Notes
+            url: https://docs.cloud.google.com/kubernetes-engine/docs/release-notes
             filters:
               - html2text
