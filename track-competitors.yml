@@ -32,8 +32,8 @@ jobs:
             filters:
               - html2text
             ---
-            name: Nutanix Community Product Blog
-            url: https://next.nutanix.com/
+            name: Nutanix product updates
+            url: https://next.nutanix.com/product-updates
             filters:
               - html2text
             ---
