@@ -33,17 +33,17 @@ jobs:
               - html2text
             ---
             name: Nutanix Community Product Blog
-            url: https://next.nutanix.com/blog-board-8
+            url: https://next.nutanix.com/
             filters:
               - html2text
             ---
             name: Broadcom VMware Cloud Foundation Releases
-            url: https://docs.broadcom.com/info2/release-notes
+            url: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/release-notes/
             filters:
               - html2text
             ---
             name: AWS EKS Kubernetes Version Support Notes
-            url: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions-standard.html
+            url: https://github.com/aws/eks-distro
             filters:
               - html2text
             ---
