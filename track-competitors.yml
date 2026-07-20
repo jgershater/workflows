@@ -1,0 +1,39 @@
+name: "Track Competitor Product Updates"
+
+on:
+  schedule:
+    # Runs every 6 hours (Adjust the cron schedule if you want it more or less frequent)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allows you to trigger the check manually from the UI anytime
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for SUSE and Nutanix updates
+        id: webchanges
+        uses: swimmwatch/webchanges-action@v1.0.1
+        with:
+          # Define the specific product update pages we found earlier
+          jobs: |
+            name: SUSE Technical Release Notes
+            url: https://www.suse.com/releasenotes/
+            filters:
+              - html2text
+            ---
+            name: SUSE Rancher Releases
+            url: https://github.com/rancher/rancher/releases
+            filters:
+              - html2text
+            ---
+            name: Nutanix Community Product Blog
+            url: https://next.nutanix.com/
+            filters:
+              - html2text
